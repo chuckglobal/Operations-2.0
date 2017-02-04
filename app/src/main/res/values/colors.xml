@@ -3,4 +3,11 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    
+    <color name="backgroundColor">#EEEEEE</color>
+    <color name="buttonColor">#E0E0E0</color>
+    <color name="buttonPressedColor">#BDBDBD</color>
+    <color name="greenAccent">#59FFA0</color>
+    <color name="fontColor">#50514F</color>
+    <color name="highScoreBackground">#81D4FA</color>
 </resources>

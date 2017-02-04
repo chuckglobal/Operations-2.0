@@ -6,25 +6,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.CountDownTimer;
-import android.os.Handler;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.Random;
-import java.util.Timer;
+import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
-import static android.R.attr.bottom;
-import static android.R.attr.breadCrumbShortTitle;
-import static android.R.attr.defaultHeight;
-import static android.R.attr.inAnimation;
-import static android.R.attr.switchMinWidth;
-import static android.R.attr.tag;
-import static android.R.attr.verticalCorrection;
+import java.util.Random;
 
 public class GameActivity extends Activity {
 
@@ -35,7 +25,6 @@ public class GameActivity extends Activity {
     TextView highScoreView;
     TextView roundCountView;
 
-    TextView testview;
 
     int answerKey = -1;
     int roundCount = 1;
@@ -43,25 +32,38 @@ public class GameActivity extends Activity {
 
     CountDownTimer gameTimer;
 
+    MediaPlayer mp;
+
+    CircularProgressBar progressBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        //initialize TextViews
         topView = (TextView) findViewById(R.id.topView);
         midView = (TextView) findViewById(R.id.middleView);
         bottomView = (TextView) findViewById(R.id.bottomView);
         highScoreView = (TextView) findViewById(R.id.highScoreView);
         roundCountView = (TextView) findViewById(R.id.roundCounterView);
-
         highScoreView.setText(String.valueOf(getHighScore()));
-
-        testview = (TextView) findViewById(R.id.textView2) ;
+        //initialize media player
+        mp = MediaPlayer.create(this, R.raw.music_success);
+        //initialize circular progress bar
+        progressBar = (CircularProgressBar) findViewById(R.id.circleProgressBar);
 
         generateEquation();
 
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        stopTimer();
+    }
+
 
     //start per round timer
     private void startTimer(){
@@ -69,16 +71,17 @@ public class GameActivity extends Activity {
             gameTimer.cancel();
             gameTimer = null;
         }
-        gameTimer = new CountDownTimer(10000, 1000) {
+        gameTimer = new CountDownTimer(5000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                if (timeProgressed < 10){
-                    timeProgressed++;
-                    testView(timeProgressed);
+                if (timeProgressed < 100){
+                    timeProgressed += 20;
+                    progressBar.setProgressWithAnimation(timeProgressed,200);
                 }else{
-                    timeProgressed++;
-                    testView(timeProgressed);
+                    timeProgressed +=20;
+                    progressBar.setProgressWithAnimation(timeProgressed,200);
                     gameTimer.cancel();
+                    roundLost();
                 }
 
             }
@@ -91,17 +94,16 @@ public class GameActivity extends Activity {
     }
 
     private void stopTimer(){
-
+        if (gameTimer != null){
             gameTimer.cancel();
             gameTimer = null;
+        }
+
         timeProgressed = 0;
+        progressBar.setProgressWithAnimation(timeProgressed,10);
 
     }
 
-    private void testView(int i){
-        TextView view = (TextView) findViewById(R.id.textView2);
-        view.setText(String.valueOf(i));
-    }
 
 
     //Choose what operation to use
@@ -273,6 +275,9 @@ public class GameActivity extends Activity {
 
     //initialize round lost dialog
     private void roundLost(){
+        gameTimer.cancel();
+        progressBar.setProgressWithAnimation(100,100);
+        playFailureAudio();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         String correctAnswer = getAnswer(answerKey);
 
@@ -304,8 +309,8 @@ public class GameActivity extends Activity {
         builder.setOnDismissListener(new DialogInterface.OnDismissListener(){
             @Override
                 public void onDismiss(DialogInterface dialog){
-                Intent quit = new Intent(GameActivity.this, StartActivity.class);
-                startActivity(quit);
+//                Intent quit = new Intent(GameActivity.this, StartActivity.class);
+//                startActivity(quit);
             }
 
         });
@@ -350,10 +355,13 @@ public class GameActivity extends Activity {
     }
 
     private void playSuccessAudio(){
-        MediaPlayer mp = MediaPlayer.create(this, R.raw.music_marimba_chord);
         mp.start();
     }
 
+    private void playFailureAudio() {
+        MediaPlayer failMP = MediaPlayer.create(this, R.raw.music_fail);
+        failMP.start();
+    }
 
 
 

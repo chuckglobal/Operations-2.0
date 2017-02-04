@@ -33,7 +33,4 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
 
-    compile 'com.mikhaellopez:circularprogressbar:1.1.1'
-
-    compile 'com.dinuscxj:circleprogressbar:1.1.1'
-}
+    compile 'com.mikhaellopez:circularprogressbar:1.1.1' }

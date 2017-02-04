@@ -11,10 +11,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 import java.util.Random;
+import java.util.StringTokenizer;
 
 public class GameActivity extends Activity {
 
@@ -53,7 +55,7 @@ public class GameActivity extends Activity {
         mp = MediaPlayer.create(this, R.raw.music_success);
         //initialize circular progress bar
         progressBar = (CircularProgressBar) findViewById(R.id.circleProgressBar);
-
+        progressBar.setProgressWithAnimation(0,50);
         generateEquation();
 
     }
@@ -71,34 +73,39 @@ public class GameActivity extends Activity {
             gameTimer.cancel();
             gameTimer = null;
         }
-        gameTimer = new CountDownTimer(5000, 1000) {
+
+        gameTimer = new CountDownTimer(5000, 100) {
             @Override
             public void onTick(long millisUntilFinished) {
-                if (timeProgressed < 100){
-                    timeProgressed += 20;
+                    timeProgressed += 2;
                     progressBar.setProgressWithAnimation(timeProgressed,200);
-                }else{
-                    timeProgressed +=20;
-                    progressBar.setProgressWithAnimation(timeProgressed,200);
-                    gameTimer.cancel();
-                    roundLost();
-                }
+                Log.d("randomNumber", String.valueOf(timeProgressed));
+
+//                else{
+//                    timeProgressed +=20;
+//                    progressBar.setProgressWithAnimation(timeProgressed,200);
+//                    gameTimer.cancel();
+//                    roundLost();
+//                }
 
             }
 
             @Override
             public void onFinish() {
+                timeProgressed += 2;
+                Log.d("randomNumber", String.valueOf(timeProgressed) + "on finish");
+                progressBar.setProgressWithAnimation(timeProgressed, 200);
                 roundLost();
             }
         }.start();
     }
 
+    //stop timer and reset progressBar
     private void stopTimer(){
         if (gameTimer != null){
             gameTimer.cancel();
             gameTimer = null;
         }
-
         timeProgressed = 0;
         progressBar.setProgressWithAnimation(timeProgressed,10);
 
@@ -270,12 +277,12 @@ public class GameActivity extends Activity {
         answerKey = -1;
         updateRoundCount();
         generateEquation();
-        startTimer();
+//        startTimer();
     }
 
     //initialize round lost dialog
     private void roundLost(){
-        gameTimer.cancel();
+
         progressBar.setProgressWithAnimation(100,100);
         playFailureAudio();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

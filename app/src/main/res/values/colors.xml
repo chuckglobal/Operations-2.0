@@ -5,6 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     
     <color name="backgroundColor">#EEEEEE</color>
+    <color name="statusBarColor">#BDBDBD</color>
     <color name="buttonColor">#E0E0E0</color>
     <color name="buttonPressedColor">#BDBDBD</color>
     <color name="greenAccent">#59FFA0</color>

@@ -1,7 +1,9 @@
 package com.scottquach.operations20;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -46,5 +48,29 @@ public class StartActivity extends AppCompatActivity {
 
         TextView scoreView = (TextView) findViewById(R.id.highScoreView);
         scoreView.setText(String.valueOf(score));
+    }
+
+    public void highscoreClicked(View view) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Are You Sure");
+        builder.setMessage("This will reset your highscore to 0");
+        builder.setPositiveButton("Reset", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                SharedPreferences sharedPref = getSharedPreferences("saveFile", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putInt("highScore", 0);
+                editor.commit();
+            }
+        });
+        builder.setNegativeButton("Nope", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
+
     }
 }

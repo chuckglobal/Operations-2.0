@@ -62,6 +62,7 @@ public class StartActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putInt("highScore", 0);
                 editor.commit();
+                updateScoreView();
             }
         });
         builder.setNegativeButton("Nope", new DialogInterface.OnClickListener() {

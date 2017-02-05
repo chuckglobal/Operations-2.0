@@ -81,13 +81,6 @@ public class GameActivity extends Activity {
                     progressBar.setProgressWithAnimation(timeProgressed,200);
                 Log.d("randomNumber", String.valueOf(timeProgressed));
 
-//                else{
-//                    timeProgressed +=20;
-//                    progressBar.setProgressWithAnimation(timeProgressed,200);
-//                    gameTimer.cancel();
-//                    roundLost();
-//                }
-
             }
 
             @Override
@@ -277,7 +270,6 @@ public class GameActivity extends Activity {
         answerKey = -1;
         updateRoundCount();
         generateEquation();
-//        startTimer();
     }
 
     //initialize round lost dialog

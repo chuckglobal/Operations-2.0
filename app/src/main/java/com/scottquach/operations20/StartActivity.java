@@ -74,4 +74,19 @@ public class StartActivity extends AppCompatActivity {
         builder.show();
 
     }
+
+    public void tutorialButtonClicked(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("How-To");
+        builder.setMessage("The goal of this game is to find the missing operation to the equation. You will be presented with 3 numbers, the first two interact with each other with the missing" +
+                " operator in order to equal the third bottom number. Click one of the four operations available that satisfies the equation before the timer runs out.");
+        builder.setPositiveButton("Okay!", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
+    }
+
 }

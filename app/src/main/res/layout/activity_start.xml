@@ -24,7 +24,9 @@
         android:layout_marginRight="16dp"
         android:layout_marginStart="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="16dp" />
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <Button
         android:text="About"
@@ -40,8 +42,8 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="32dp"
         app:layout_constraintTop_toBottomOf="@+id/startButton"
-        android:layout_width="55dp"
-        android:layout_height="55dp" />
+        android:layout_width="60dp"
+        android:layout_height="60dp" />
 
     <View
         android:layout_width="0dp"
@@ -70,8 +72,9 @@
         app:layout_constraintRight_toRightOf="@+id/view2"
         app:layout_constraintTop_toTopOf="@+id/view2"
         app:layout_constraintBottom_toBottomOf="@+id/view2"
-        app:layout_constraintLeft_toLeftOf="@+id/view2"
-        app:layout_constraintHorizontal_bias="0.75" />
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/textView2"
+        android:layout_marginLeft="8dp" />
 
     <TextView
         android:text="Highscore"
@@ -101,5 +104,22 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="80dp"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:text="How-To"
+        android:textSize="10sp"
+        android:onClick="tutorialButtonClicked"
+        android:background="@drawable/selector_button_round"
+        android:id="@+id/button2"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toBottomOf="@+id/button"
+        android:layout_width="60dp"
+        android:layout_height="60dp" />
 
 </android.support.constraint.ConstraintLayout>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Operations 2.0</string>
+    <string name="app_name">Operations</string>
 
     <string name="restart">restart</string>
     <string name="quit">quit</string>

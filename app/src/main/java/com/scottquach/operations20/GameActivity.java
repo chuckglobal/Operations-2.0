@@ -61,6 +61,12 @@ public class GameActivity extends Activity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        this.recreate();
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
         stopTimer();

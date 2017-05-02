@@ -22,18 +22,7 @@ public class StartActivity extends AppCompatActivity {
         updateScoreView();
     }
 
-    public void startButtonClicked(View view) {
-        Intent start = new Intent(StartActivity.this, GameActivity.class);
-        startActivity(start);
-    }
 
-    public void aboutButtonClicked(View view) {
-        new LibsBuilder()
-                //provide a style (optional) (LIGHT, DARK, LIGHT_DARK_TOOLBAR)
-                .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR)
-                //start the activity
-                .start(this);
-    }
 
     //get highscore
     private int getHighScore(){
@@ -49,9 +38,24 @@ public class StartActivity extends AppCompatActivity {
         TextView scoreView = (TextView) findViewById(R.id.highScoreView);
         scoreView.setText(String.valueOf(score));
     }
+/* Button
+    Clicks
+ */
+
+    public void startButtonClicked(View view) {
+    Intent start = new Intent(StartActivity.this, GameActivity.class);
+    startActivity(start);
+}
+
+    public void aboutButtonClicked(View view) {
+        new LibsBuilder()
+                //provide a style (optional) (LIGHT, DARK, LIGHT_DARK_TOOLBAR)
+                .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR)
+                //start the activity
+                .start(this);
+    }
 
     public void highscoreClicked(View view) {
-
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Are You Sure");
         builder.setMessage("This will reset your highscore to 0");

@@ -65,7 +65,7 @@ public class GameActivity extends Activity {
         super.onPause();
         stopTimer();
     }
-
+    
 
     //start per round timer
     private void startTimer(){
@@ -352,11 +352,11 @@ public class GameActivity extends Activity {
     private void updateBottom(int value){
         bottomView.setText(String.valueOf(value));
     }
-
+    //play ding audio
     private void playSuccessAudio(){
         mp.start();
     }
-
+    //play failure audio
     private void playFailureAudio() {
         MediaPlayer failMP = MediaPlayer.create(this, R.raw.music_fail);
         failMP.start();

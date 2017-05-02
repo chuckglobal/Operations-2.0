@@ -23,7 +23,6 @@ public class StartActivity extends AppCompatActivity {
     }
 
 
-
     //get highscore
     private int getHighScore(){
         SharedPreferences sharedPreferences = getSharedPreferences("saveFile", MODE_PRIVATE);

@@ -61,12 +61,6 @@ public class GameActivity extends Activity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        this.recreate();
-    }
-
-    @Override
     protected void onPause() {
         super.onPause();
         stopTimer();
@@ -308,6 +302,7 @@ public class GameActivity extends Activity {
             @Override
             public void onClick(DialogInterface dialog, int which)  {
                 Intent goHome = new Intent(GameActivity.this, StartActivity.class);
+                finish();
                 startActivity(goHome);
             }
         });
@@ -323,6 +318,7 @@ public class GameActivity extends Activity {
             @Override
             public void onCancel(DialogInterface dialog) {
                 Intent quit = new Intent(GameActivity.this, StartActivity.class);
+                finish();
                 startActivity(quit);
             }
         });
